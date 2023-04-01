@@ -21,12 +21,11 @@ private val students = listOf(
 )
 
 fun Route.listStudentsRoute() {
-    get("/students") {
+    get("/teacher/student") {
         call.respond(
             HttpStatusCode.OK,
             Json.encodeToString(students)
         )
-
             }
 
     }
