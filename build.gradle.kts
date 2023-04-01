@@ -40,6 +40,8 @@ dependencies {
     implementation ("io.jsonwebtoken:jjwt-jackson:0.11.2")
     testImplementation("io.ktor:ktor-server-tests-jvm:$ktor_version")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
+    implementation("com.auth0:java-jwt:4.3.0")
+
 
 
 }
