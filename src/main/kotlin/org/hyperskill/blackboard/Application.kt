@@ -5,6 +5,7 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import org.hyperskill.blackboard.plugins.*
 import org.hyperskill.blackboard.routes.*
+import org.hyperskill.blackboard.routes.student.studentRoutes
 import org.hyperskill.blackboard.routes.teacher.teacherRoutes
 import org.hyperskill.blackboard.routes.userLogin.*
 
@@ -16,9 +17,11 @@ fun Application.module() {
     configureMonitoring()
     configureSerialization()
     println("Dev mode on " + this.environment.developmentMode)
-   // configureSecurity()
-
+//    configureSecurity()
+    configureAuthentication()
+//    configureSession()
     logInRoutes()
     teacherRoutes()
+    studentRoutes()
 
 }

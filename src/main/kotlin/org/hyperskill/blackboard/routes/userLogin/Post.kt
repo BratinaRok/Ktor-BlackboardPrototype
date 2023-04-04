@@ -8,16 +8,17 @@ import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import org.hyperskill.blackboard.data.model.user.LogInRequest
-
-import io.ktor.http.cio.*
-import io.ktor.util.reflect.*
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.encodeToString
+import io.ktor.server.sessions.*
+import kotlinx.serialization.json.Json
+import org.hyperskill.blackboard.data.UserSession
 import org.hyperskill.blackboard.data.model.user.User
 import org.hyperskill.blackboard.data.model.user.Users
 
 fun Route.logInRoute() {
     post("/login") {
         val loginRequest = call.receive<LogInRequest>()
-
         val user = Users.userData[loginRequest.username]
         if (user?.base64sha256HashPass == loginRequest.pass) {
             val token = generateToken(user) // Generate a token for the authenticated user
@@ -27,6 +28,7 @@ fun Route.logInRoute() {
             call.respond(HttpStatusCode.Unauthorized) // Invalid credentials, respond with an unauthorized status code
         }
     }
+
 }
 
 fun checkUserRole(username: String): String {
